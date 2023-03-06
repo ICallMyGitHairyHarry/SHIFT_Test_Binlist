@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.BinFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.shifttestbinlist.ui.main.BinViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:binApiStatus="@{viewModel.status}"
+        app:errorMessage="@{viewModel.errorMessage}">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bin_input_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/bin_text_layout_hint"
+            app:errorIconDrawable="@null"
+            app:helperText="@string/bin_text_layout_helper_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:placeholderText="@string/bin_text_layout_placeholder">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bin_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="numberDecimal" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="100dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/loading_animation"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="48dp"
+            android:visibility="gone" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bin_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+
+            <TextView
+                android:id="@+id/scheme_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scheme"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/scheme_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintStart_toStartOf="@+id/scheme_label"
+                app:layout_constraintTop_toBottomOf="@+id/scheme_label"
+                app:nullableText="@{viewModel.binData.scheme}"
+                tools:text="Mastercard" />
+
+            <TextView
+                android:id="@+id/brand_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/brand"
+                app:layout_constraintStart_toStartOf="@+id/scheme_value"
+                app:layout_constraintTop_toBottomOf="@+id/scheme_value" />
+
+            <TextView
+                android:id="@+id/brand_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintStart_toStartOf="@+id/brand_label"
+                app:layout_constraintTop_toBottomOf="@+id/brand_label"
+                app:nullableText="@{viewModel.binData.brand}"
+                tools:text="Visa/Dankort" />
+
+            <TextView
+                android:id="@+id/card_number_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/card_number"
+                app:layout_constraintStart_toStartOf="@+id/brand_value"
+                app:layout_constraintTop_toBottomOf="@+id/brand_value" />
+
+            <TextView
+                android:id="@+id/length_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_number_length"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintStart_toStartOf="@+id/card_number_label"
+                app:layout_constraintTop_toBottomOf="@+id/card_number_label" />
+
+            <TextView
+                android:id="@+id/card_number_length_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintStart_toStartOf="@+id/length_label"
+                app:layout_constraintTop_toBottomOf="@+id/length_label"
+                app:nullableText='@{viewModel.binData.number.length.toString()}'
+                tools:text="16" />
+
+            <TextView
+                android:id="@+id/card_number_luhn_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/card_number_luhn"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintStart_toEndOf="@+id/length_label"
+                app:layout_constraintTop_toBottomOf="@+id/card_number_label" />
+
+            <TextView
+                android:id="@+id/card_number_luhn_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:booleanText="@{viewModel.binData.number.luhn}"
+                app:layout_constraintStart_toStartOf="@+id/card_number_luhn_label"
+                app:layout_constraintTop_toBottomOf="@+id/card_number_luhn_label"
+                tools:text="Yes / No" />
+
+            <TextView
+                android:id="@+id/type_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="@string/type"
+                app:layout_constraintStart_toEndOf="@+id/scheme_label"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/type_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:cardTypeText="@{viewModel.binData.type}"
+                app:layout_constraintStart_toStartOf="@+id/type_label"
+                app:layout_constraintTop_toBottomOf="@+id/type_label"
+                tools:text="Debit / Credit" />
+
+            <TextView
+                android:id="@+id/prepaid_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/prepaid"
+                app:layout_constraintStart_toStartOf="@+id/type_value"
+                app:layout_constraintTop_toBottomOf="@+id/type_value" />
+
+            <TextView
+                android:id="@+id/prepaid_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:booleanText="@{viewModel.binData.prepaid}"
+                app:layout_constraintStart_toStartOf="@+id/prepaid_label"
+                app:layout_constraintTop_toBottomOf="@+id/prepaid_label"
+                tools:text="Yes / No" />
+
+            <TextView
+                android:id="@+id/country_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/country"
+                app:layout_constraintStart_toStartOf="@+id/prepaid_value"
+                app:layout_constraintTop_toBottomOf="@+id/prepaid_value" />
+
+            <TextView
+                android:id="@+id/country_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:countryText="@{viewModel.binData.country}"
+                app:layout_constraintStart_toStartOf="@+id/country_label"
+                app:layout_constraintTop_toBottomOf="@+id/country_label"
+                tools:text="🇩🇰 Denmark" />
+
+            <TextView
+                android:id="@+id/country_coordinates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:countryCoordinatesText="@{viewModel.binData.country}"
+                app:layout_constraintStart_toStartOf="@+id/country_value"
+                app:layout_constraintTop_toBottomOf="@+id/country_value"
+                tools:text="(latitude: 56, longitude: 10)" />
+
+            <TextView
+                android:id="@+id/bank_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/bank"
+                app:layout_constraintStart_toStartOf="@+id/card_number_length_value"
+                app:layout_constraintTop_toBottomOf="@+id/card_number_length_value" />
+
+            <TextView
+                android:id="@+id/bank_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColorLink="@color/teal_700"
+                app:bankInfoText='@{viewModel.binData.bank}'
+                app:layout_constraintStart_toStartOf="@+id/bank_label"
+                app:layout_constraintTop_toBottomOf="@+id/bank_label"
+                tools:text="Jyske Bank, Hjørring, www.jyskebank.dk, +4589893300" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/requests_history"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/history_hint"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/history_item_hint"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bins_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            app:binListData="@{viewModel.binsList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/vertical_list_item" />
+
+
+    </LinearLayout>
+
+
+</layout>

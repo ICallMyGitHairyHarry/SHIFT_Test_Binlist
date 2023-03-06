@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">SHIFT Test Binlist</string>
+    <string name="bin_text_layout_helper_text">Enter the first digits of a card number</string>
+    <string name="bin_text_layout_hint">BIN/IIN</string>
+    <string name="bin_text_layout_placeholder">4571 7360</string>
+    <string name="scheme">SCHEME / NETWORK</string>
+    <string name="brand">BRAND</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="card_number_length">LENGTH</string>
+    <string name="card_number_luhn">LUHN</string>
+    <string name="type">TYPE</string>
+    <string name="prepaid">PREPAID</string>
+    <string name="country">COUNTRY</string>
+    <string name="bank">BANK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="yes_no">Yes / No</string>
+    <string name="debit">Debit</string>
+    <string name="credit">Credit</string>
+    <string name="debit_credit">Debit / Credit</string>
+    <string name="insufficient_digits">Enter 4–8 digits!</string>
+    <string name="country_text">%s %s</string>
+    <string name="country_coordinates">(latitude: %s,\nlongitude: %s)</string>
+    <string name="requests_history">Requests history</string>
+    <string name="history_hint">Request is added to history when the Enter button is pressed.</string>
+    <string name="history_item_hint">Click on the item to display BIN information in the above block.</string>
+    <string name="remove_confirm_title">Are you sure, you want to delete %s?</string>
+</resources>
